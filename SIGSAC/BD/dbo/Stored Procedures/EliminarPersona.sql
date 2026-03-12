@@ -1,0 +1,18 @@
+﻿
+
+CREATE PROCEDURE EliminarPersona
+
+@Id INT
+
+AS
+BEGIN
+
+SET NOCOUNT ON;
+
+DELETE
+FROM Persona
+WHERE id=@Id
+
+SELECT @Id
+
+END
