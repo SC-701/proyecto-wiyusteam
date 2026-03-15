@@ -10,43 +10,43 @@ namespace Abstracciones.Modelos
     public class BautismoBase
     {
         [Required(ErrorMessage = "El bautizando es requerido")]
-        public int? Bautizandoid { get; set; }
+        public int? BautizandoId { get; set; }
         
         [Required(ErrorMessage = "El padre del bautizando es requerido")]
-        public int? Padreid { get; set; }
+        public int? PadreId { get; set; }
 
         [Required(ErrorMessage = "La madre del bautizando es requerido")]
-        public int? Madreid { get; set; }
+        public int? MadreId { get; set; }
 
         [Required(ErrorMessage = "El tipo de unión es requerido")]
         [StringLength(50, ErrorMessage = "El tipo de unión debe tener entre 3 y 50 caracteres", MinimumLength = 3)]
         [RegularExpression(@"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$", ErrorMessage = "El tipo de unión solo puede contener letras")]
-        public string? TipoUnion { get; set; }
+        public string? TipoUnionPadres { get; set; }
 
         [Required(ErrorMessage = "La propiedad fecha de matrimonio es requerida")]
         [DataType(DataType.Date)]
-        public DateTime FechaMatrimonio { get; set; }
+        public DateTime FechaMatrimonioPadres { get; set; }
 
         [Required(ErrorMessage = "El Abuelo paterno del bautizando es requerido")]
-        public int? AbueloPaternoid { get; set; }
+        public int? AbueloPaternoId { get; set; }
 
         [Required(ErrorMessage = "La Abuela paterna del bautizando es requerido")]
-        public int? AbuelaPaternaid { get; set; }
+        public int? AbuelaPaternaId { get; set; }
 
         [Required(ErrorMessage = "El Abuelo materno del bautizando es requerido")]
-        public int? AbueloMaternoid { get; set; }
+        public int? AbueloMaternoId { get; set; }
 
         [Required(ErrorMessage = "La Abuela materna del bautizando es requerido")]
-        public int? AbuelaMaternaid { get; set; }
+        public int? AbuelaMaternaId { get; set; }
 
         [Required(ErrorMessage = "El padrino del bautizando es requerido")]
-        public int? Padrinoid { get; set; }
+        public int? PadrinoId { get; set; }
 
         [Required(ErrorMessage = "La madrina del bautizando es requerido")]
-        public int? Madrinaid { get; set; }
+        public int? MadrinaId { get; set; }
 
         [Required(ErrorMessage = "El declarante del bautizando es requerido")]
-        public int? Declaranteid { get; set; }
+        public int? DeclaranteId { get; set; }
 
 
     }

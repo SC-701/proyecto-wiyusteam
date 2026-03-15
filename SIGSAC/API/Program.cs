@@ -15,6 +15,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IPersonaFlujo, PersonaFlujo>();
 builder.Services.AddScoped<IPersonaDA, PersonaDA>();
+builder.Services.AddScoped<IBautismoFlujo, BautismoFlujo>();
+builder.Services.AddScoped<IBautismoDA, BautismoDA>();
 builder.Services.AddScoped<IRepositorioDapper, RepositorioDapper>();
 
 
