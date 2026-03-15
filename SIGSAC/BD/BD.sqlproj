@@ -68,5 +68,10 @@
     <Build Include="dbo\Stored Procedures\EliminarPersona.sql" />
     <Build Include="dbo\Stored Procedures\EditarPersona.sql" />
     <Build Include="dbo\Stored Procedures\AgregarPersona.sql" />
+    <Build Include="dbo\Stored Procedures\AgregarBautismo.sql" />
+    <Build Include="dbo\Stored Procedures\EditarBautismo.sql" />
+    <Build Include="dbo\Stored Procedures\EliminarBautismo.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerBautismo.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerBautismos.sql" />
   </ItemGroup>
 </Project>

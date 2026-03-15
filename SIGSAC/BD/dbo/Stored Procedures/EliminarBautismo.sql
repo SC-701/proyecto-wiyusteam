@@ -1,0 +1,18 @@
+﻿
+
+CREATE PROCEDURE EliminarBautismo
+
+@Id INT
+
+AS
+BEGIN
+
+SET NOCOUNT ON;
+
+DELETE
+FROM Bautismo
+WHERE id=@Id
+
+SELECT @Id
+
+END
