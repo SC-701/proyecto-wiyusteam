@@ -1,0 +1,71 @@
+INSERT INTO persona
+(
+nombre,
+primer_apellido,
+segundo_apellido,
+cedula,
+pasaporte,
+sexo,
+fecha_nacimiento,
+hora_nacimiento,
+lugar_nacimiento,
+nacionalidad,
+estado_civil,
+profesion,
+religion,
+direccion
+)
+VALUES
+(
+'Joaquin',
+'Solano',
+'Vega',
+'112345678',
+'CR99821',
+'Masculino',
+'1990-05-12',
+'08:45',
+'San Jose',
+'Costarricense',
+'Casado',
+'Ingeniero',
+'Catolica',
+'Heredia, Costa Rica'
+);
+
+
+INSERT INTO persona
+(
+nombre,
+primer_apellido,
+segundo_apellido,
+cedula,
+pasaporte,
+sexo,
+fecha_nacimiento,
+hora_nacimiento,
+lugar_nacimiento,
+nacionalidad,
+estado_civil,
+profesion,
+religion,
+direccion
+)
+VALUES
+('Maria','Fernandez','Rojas','209876543','CR77123','Femenino','1992-11-03','14:20','Cartago','Costarricense','Casada','Abogada','Catolica','Cartago Centro'),
+
+('Carlos','Perez','Mora','304567891','CR33445','Masculino','1985-07-18','10:15','Alajuela','Costarricense','Casado','Contador','Catolica','Alajuela Centro'),
+
+('Ana','Ramirez','Castro','401234567','CR66554','Femenino','1995-09-25','06:30','Heredia','Costarricense','Soltera','Enfermera','Catolica','Heredia, San Pablo'),
+
+('Luis','Gonzalez','Araya','502345678','CR11992','Masculino','1988-04-09','12:10','Puntarenas','Costarricense','Casado','Profesor','Catolica','Puntarenas Centro'),
+
+('Daniela','Jimenez','Salas','603456789','CR77881','Femenino','1999-01-14','18:05','San Jose','Costarricense','Soltera','Estudiante','Catolica','Desamparados'),
+
+('Miguel','Vargas','Chaves','704567890','CR44771','Masculino','1983-02-28','03:50','Limon','Costarricense','Casado','Mecanico','Catolica','Limon Centro'),
+
+('Laura','Castillo','Navarro','805678901','CR99873','Femenino','1993-06-21','09:40','Guanacaste','Costarricense','Casada','Administradora','Catolica','Liberia'),
+
+('Ricardo','Morales','Campos','906789012','CR66321','Masculino','1987-12-30','11:55','San Jose','Costarricense','Casado','Arquitecto','Catolica','Escazu'),
+
+('Sofia','Herrera','Lopez','107890123','CR22456','Femenino','2000-08-16','16:35','Cartago','Costarricense','Soltera','Estudiante','Catolica','Tres Rios');

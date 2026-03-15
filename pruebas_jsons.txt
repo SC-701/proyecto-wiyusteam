@@ -1,0 +1,176 @@
+{
+  "nombre": "Joaquin",
+  "primerApellido": "Solano",
+  "segundoApellido": "Vega",
+  "cedula": "112345678",
+  "pasaporte": "CR99821",
+  "sexo": "Masculino",
+  "fechaNacimiento": "1990-05-12",
+  "horaNacimiento": "08:45",
+  "lugarNacimiento": "San Jose",
+  "nacionalidad": "Costarricense",
+  "estadoCivil": "Casado",
+  "profesion": "Ingeniero",
+  "religion": "Catolica",
+  "direccion": "Heredia, Costa Rica"
+}
+{
+  "nombre": "Maria",
+  "primerApellido": "Fernandez",
+  "segundoApellido": "Rojas",
+  "cedula": "209876543",
+  "pasaporte": "CR77123",
+  "sexo": "Femenino",
+  "fechaNacimiento": "1992-11-03",
+  "horaNacimiento": "14:20",
+  "lugarNacimiento": "Cartago",
+  "nacionalidad": "Costarricense",
+  "estadoCivil": "Casada",
+  "profesion": "Abogada",
+  "religion": "Catolica",
+  "direccion": "Cartago Centro"
+}
+{
+  "nombre": "Carlos",
+  "primerApellido": "Perez",
+  "segundoApellido": "Mora",
+  "cedula": "304567891",
+  "pasaporte": "CR33445",
+  "sexo": "Masculino",
+  "fechaNacimiento": "1985-07-18",
+  "horaNacimiento": "10:15",
+  "lugarNacimiento": "Alajuela",
+  "nacionalidad": "Costarricense",
+  "estadoCivil": "Casado",
+  "profesion": "Contador",
+  "religion": "Catolica",
+  "direccion": "Alajuela Centro"
+}
+{
+  "nombre": "Ana",
+  "primerApellido": "Ramirez",
+  "segundoApellido": "Castro",
+  "cedula": "401234567",
+  "pasaporte": "CR66554",
+  "sexo": "Femenino",
+  "fechaNacimiento": "1995-09-25",
+  "horaNacimiento": "06:30",
+  "lugarNacimiento": "Heredia",
+  "nacionalidad": "Costarricense",
+  "estadoCivil": "Soltera",
+  "profesion": "Enfermera",
+  "religion": "Catolica",
+  "direccion": "Heredia, San Pablo"
+}
+{
+  "nombre": "Luis",
+  "primerApellido": "Gonzalez",
+  "segundoApellido": "Araya",
+  "cedula": "502345678",
+  "pasaporte": "CR11992",
+  "sexo": "Masculino",
+  "fechaNacimiento": "1988-04-09",
+  "horaNacimiento": "12:10",
+  "lugarNacimiento": "Puntarenas",
+  "nacionalidad": "Costarricense",
+  "estadoCivil": "Casado",
+  "profesion": "Profesor",
+  "religion": "Catolica",
+  "direccion": "Puntarenas Centro"
+}
+
+{
+  "nombre": "Daniela",
+  "primerApellido": "Jimenez",
+  "segundoApellido": "Salas",
+  "cedula": "603456789",
+  "pasaporte": "CR77881",
+  "sexo": "Femenino",
+  "fechaNacimiento": "1999-01-14",
+  "horaNacimiento": "18:05",
+  "lugarNacimiento": "San Jose",
+  "nacionalidad": "Costarricense",
+  "estadoCivil": "Soltera",
+  "profesion": "Estudiante",
+  "religion": "Catolica",
+  "direccion": "Desamparados"
+}
+{
+  "nombre": "Miguel",
+  "primerApellido": "Vargas",
+  "segundoApellido": "Chaves",
+  "cedula": "704567890",
+  "pasaporte": "CR44771",
+  "sexo": "Masculino",
+  "fechaNacimiento": "1983-02-28",
+  "horaNacimiento": "03:50",
+  "lugarNacimiento": "Limon",
+  "nacionalidad": "Costarricense",
+  "estadoCivil": "Casado",
+  "profesion": "Mecanico",
+  "religion": "Catolica",
+  "direccion": "Limon Centro"
+}
+
+{
+  "nombre": "Laura",
+  "primerApellido": "Castillo",
+  "segundoApellido": "Navarro",
+  "cedula": "805678901",
+  "pasaporte": "CR99873",
+  "sexo": "Femenino",
+  "fechaNacimiento": "1993-06-21",
+  "horaNacimiento": "09:40",
+  "lugarNacimiento": "Guanacaste",
+  "nacionalidad": "Costarricense",
+  "estadoCivil": "Casada",
+  "profesion": "Administradora",
+  "religion": "Catolica",
+  "direccion": "Liberia"
+}
+
+{
+  "nombre": "Ricardo",
+  "primerApellido": "Morales",
+  "segundoApellido": "Campos",
+  "cedula": "906789012",
+  "pasaporte": "CR66321",
+  "sexo": "Masculino",
+  "fechaNacimiento": "1987-12-30",
+  "horaNacimiento": "11:55",
+  "lugarNacimiento": "San Jose",
+  "nacionalidad": "Costarricense",
+  "estadoCivil": "Casado",
+  "profesion": "Arquitecto",
+  "religion": "Catolica",
+  "direccion": "Escazu"
+}
+
+{
+  "nombre": "Sofia",
+  "primerApellido": "Herrera",
+  "segundoApellido": "Lopez",
+  "cedula": "107890123",
+  "pasaporte": "CR22456",
+  "sexo": "Femenino",
+  "fechaNacimiento": "2000-08-16",
+  "horaNacimiento": "16:35",
+  "lugarNacimiento": "Cartago",
+  "nacionalidad": "Costarricense",
+  "estadoCivil": "Soltera",
+  "profesion": "Estudiante",
+  "religion": "Catolica",
+  "direccion": "Tres Rios"
+}
+
+
+
+
+
+
+
+
+
+
+
+

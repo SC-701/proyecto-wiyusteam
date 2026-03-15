@@ -5,10 +5,10 @@
 @MadreId INT,
 @TipoUnionPadres VARCHAR(50),
 @FechaMatrimonioPadres DATE,
-@AbueloMaternoId INT,
-@AbuelaMaternaId INT,
 @AbueloPaternoId INT,
 @AbuelaPaternaId INT,
+@AbueloMaternoId INT,
+@AbuelaMaternaId INT,
 @PadrinoId INT,
 @MadrinaId INT,
 @DeclaranteId INT
