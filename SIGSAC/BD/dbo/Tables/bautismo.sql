@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[bautismo] (
     [id]                      INT           IDENTITY (1, 1) NOT NULL,
-    [sacramento]              VARCHAR (200) NOT NULL,
+    [sacramento]              VARCHAR (200) NOT NULL DEFAULT 1,
     [bautizando_id]           INT           NOT NULL,
     [padre_id]                INT           NOT NULL,
     [madre_id]                INT           NOT NULL,
