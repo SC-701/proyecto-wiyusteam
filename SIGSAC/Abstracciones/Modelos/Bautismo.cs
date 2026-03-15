@@ -10,13 +10,13 @@ namespace Abstracciones.Modelos
     public class BautismoBase
     {
         [Required(ErrorMessage = "El bautizando es requerido")]
-        public string? Bautizandoid { get; set; }
+        public int? Bautizandoid { get; set; }
         
         [Required(ErrorMessage = "El padre del bautizando es requerido")]
-        public string? Padreid { get; set; }
+        public int? Padreid { get; set; }
 
         [Required(ErrorMessage = "La madre del bautizando es requerido")]
-        public string? Madreid { get; set; }
+        public int? Madreid { get; set; }
 
         [Required(ErrorMessage = "El tipo de unión es requerido")]
         [StringLength(50, ErrorMessage = "El tipo de unión debe tener entre 3 y 50 caracteres", MinimumLength = 3)]
@@ -28,25 +28,25 @@ namespace Abstracciones.Modelos
         public DateTime FechaMatrimonio { get; set; }
 
         [Required(ErrorMessage = "El Abuelo paterno del bautizando es requerido")]
-        public string? AbueloPaternoid { get; set; }
+        public int? AbueloPaternoid { get; set; }
 
         [Required(ErrorMessage = "La Abuela paterna del bautizando es requerido")]
-        public string? AbuelaPaternaid { get; set; }
+        public int? AbuelaPaternaid { get; set; }
 
         [Required(ErrorMessage = "El Abuelo materno del bautizando es requerido")]
-        public string? AbueloMaternoid { get; set; }
+        public int? AbueloMaternoid { get; set; }
 
         [Required(ErrorMessage = "La Abuela materna del bautizando es requerido")]
-        public string? AbuelaMaternaid { get; set; }
+        public int? AbuelaMaternaid { get; set; }
 
         [Required(ErrorMessage = "El padrino del bautizando es requerido")]
-        public string? Padrinoid { get; set; }
+        public int? Padrinoid { get; set; }
 
         [Required(ErrorMessage = "La madrina del bautizando es requerido")]
-        public string? Madrinaid { get; set; }
+        public int? Madrinaid { get; set; }
 
         [Required(ErrorMessage = "El declarante del bautizando es requerido")]
-        public string? Declaranteid { get; set; }
+        public int? Declaranteid { get; set; }
 
 
     }
