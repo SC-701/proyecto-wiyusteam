@@ -4,7 +4,7 @@ namespace Abstracciones.Interfaces.DA
 {
     public interface IBautismoDA
     {
-        Task<IEnumerable<BautismoResponse>> Obtener();
+        Task<IEnumerable<BautismoDetalle>> Obtener();
 
         Task<BautismoDetalle> Obtener(int Id);
 

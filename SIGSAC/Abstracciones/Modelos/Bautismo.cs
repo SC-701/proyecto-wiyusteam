@@ -11,7 +11,8 @@ namespace Abstracciones.Modelos
     {
         [Required(ErrorMessage = "El bautizando es requerido")]
         public int? BautizandoId { get; set; }
-        
+
+
         [Required(ErrorMessage = "El padre del bautizando es requerido")]
         public int? PadreId { get; set; }
 
@@ -52,6 +53,7 @@ namespace Abstracciones.Modelos
     }
     public class BautismoRequest : BautismoBase //Se usa cuando envías datos al API... está vacía porque BautismoRequest automáticamente hereda todas las propiedades de BautismoBase
     {
+
     }
 
     public class BautismoResponse : BautismoBase
@@ -61,6 +63,17 @@ namespace Abstracciones.Modelos
 
     public class BautismoDetalle : BautismoResponse // Se usa cuando quieres más información que la normal... sirve para agregar información extra cuando haces consultas más complejas
     {
+        public string? BautizandoNombre { get; set; }
+        public string? PadreNombre { get; set; }
+        public string? MadreNombre { get; set; }
+        public string? AbueloPaternoNombre { get; set; }
+        public string? AbuelaPaternaNombre { get; set; }
+        public string? AbueloMaternoNombre { get; set; }
+        public string? AbuelaMaternaNombre { get; set; }
+
+        public string? PadrinoNombre { get; set; }
+        public string? MadrinaNombre { get; set; }
+        public string? DeclaranteNombre { get; set; }
     }
 
 }

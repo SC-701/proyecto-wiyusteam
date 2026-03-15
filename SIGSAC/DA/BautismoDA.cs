@@ -44,7 +44,7 @@ namespace DA
         {
             await verificarBautismoExiste(Id);
 
-            string query = @"EditarPersona";
+            string query = @"EditarBautismo";
 
             var resultadoConsulta = await _sqlConnection.ExecuteScalarAsync<int>(
                 query,
@@ -83,11 +83,11 @@ namespace DA
             return resultadoConsulta;
         }
 
-        public async Task<IEnumerable<BautismoResponse>> Obtener()
+        public async Task<IEnumerable<BautismoDetalle>> Obtener()
         {
             string query = @"ObtenerBautismos";
 
-            var resultadoConsulta = await _sqlConnection.QueryAsync<BautismoResponse>(query);
+            var resultadoConsulta = await _sqlConnection.QueryAsync<BautismoDetalle>(query);
 
             return resultadoConsulta;
         }
