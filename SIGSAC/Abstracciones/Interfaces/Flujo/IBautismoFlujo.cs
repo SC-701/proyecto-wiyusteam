@@ -50,4 +50,4 @@ namespace Abstracciones.Interfaces.Flujo // Namespace de la capa de Flujo (Appli
         Task<int> Eliminar(int Id);
     }
 }
-}
+
