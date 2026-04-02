@@ -1,0 +1,67 @@
+﻿@page
+@model Web.Pages.Bautismos.DetalleModel
+
+<div class="container mt-5" style="max-width: 900px;">
+
+    <div class="card-liturgica-detalle">
+
+        <!-- HEADER -->
+        <div class="detalle-header">
+            <h3>@Model.bautismo.BautizandoNombre</h3>
+            <span class="badge-liturgico">Bautismo</span>
+        </div>
+
+        <hr class="linea-dorada" />
+
+        <!-- PADRES -->
+        <h5 class="mt-3">Padres</h5>
+        <div class="row g-3">
+            <div class="col-md-6"><b>Padre:</b><br />@Model.bautismo.PadreNombre</div>
+            <div class="col-md-6"><b>Madre:</b><br />@Model.bautismo.MadreNombre</div>
+        </div>
+
+        <!-- ABUELOS -->
+        <h5 class="mt-4">Abuelos</h5>
+        <div class="row g-3">
+            <div class="col-md-6"><b>Abuelo Paterno:</b><br />@Model.bautismo.AbueloPaternoNombre</div>
+            <div class="col-md-6"><b>Abuela Paterna:</b><br />@Model.bautismo.AbuelaPaternaNombre</div>
+
+            <div class="col-md-6"><b>Abuelo Materno:</b><br />@Model.bautismo.AbueloMaternoNombre</div>
+            <div class="col-md-6"><b>Abuela Materna:</b><br />@Model.bautismo.AbuelaMaternaNombre</div>
+        </div>
+
+        <!-- PADRINOS -->
+        <h5 class="mt-4">Padrinos</h5>
+        <div class="row g-3">
+            <div class="col-md-6"><b>Padrino:</b><br />@Model.bautismo.PadrinoNombre</div>
+            <div class="col-md-6"><b>Madrina:</b><br />@Model.bautismo.MadrinaNombre</div>
+        </div>
+
+        <!-- OTROS -->
+        <h5 class="mt-4">Información adicional</h5>
+        <div class="row g-3">
+            <div class="col-md-6"><b>Declarante:</b><br />@Model.bautismo.DeclaranteNombre</div>
+            <div class="col-md-6"><b>Tipo Unión Padres:</b><br />@Model.bautismo.TipoUnionPadres</div>
+
+            <div class="col-md-6">
+                <b>Fecha Matrimonio:</b><br />
+                @Model.bautismo.FechaMatrimonioPadres.ToShortDateString()
+            </div>
+        </div>
+
+        <!-- BOTONES -->
+        <div class="mt-4 d-flex justify-content-end gap-2">
+
+            <a class="btn btn-liturgico-outline" asp-page="./Index">
+                Regresar
+            </a>
+
+            <a class="btn btn-liturgico" asp-page="./Editar" asp-route-id="@Model.bautismo.Id">
+                Editar
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

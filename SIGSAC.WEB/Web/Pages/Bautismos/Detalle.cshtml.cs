@@ -6,23 +6,26 @@ using System.Text.Json;
 
 namespace Web.Pages.Bautismos
 {
-    public class IndexModel : PageModel
+    public class DetalleModel : PageModel
     {
         private IConfiguracion _configuracion;
 
-        public IList<BautismoDetalle> bautismos { get; set; } = new List<BautismoDetalle>();
+        public BautismoDetalle bautismo { get; set; } = new BautismoDetalle();
 
-        public IndexModel(IConfiguracion configuracion)
+        public DetalleModel(IConfiguracion configuracion)
         {
             _configuracion = configuracion;
         }
 
-        public async Task OnGet()
+        public async Task OnGet(int? id)
         {
-            string endpoint = _configuracion.ObtenerMetodo("ApiEndPoints", "ObtenerBautismos");
+            if (id == null)
+                return;
+
+            string endpoint = _configuracion.ObtenerMetodo("ApiEndPoints", "ObtenerBautismo");
 
             var cliente = new HttpClient();
-            var solicitud = new HttpRequestMessage(HttpMethod.Get, endpoint);
+            var solicitud = new HttpRequestMessage(HttpMethod.Get, string.Format(endpoint, id));
 
             var respuesta = await cliente.SendAsync(solicitud);
             respuesta.EnsureSuccessStatusCode();
@@ -36,7 +39,7 @@ namespace Web.Pages.Bautismos
                     PropertyNameCaseInsensitive = true
                 };
 
-                bautismos = JsonSerializer.Deserialize<List<BautismoDetalle>>(resultado, opciones);
+                bautismo = JsonSerializer.Deserialize<BautismoDetalle>(resultado, opciones);
             }
         }
     }

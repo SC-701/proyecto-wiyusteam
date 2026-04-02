@@ -1,4 +1,80 @@
 ﻿@page
 @model Web.Pages.Bautismos.IndexModel
-@{
-}
+
+<div class="container mt-5">
+
+    <h2 class="titulo-seccion mb-4">Listado de Bautismos</h2>
+
+    <div class="text-end mb-4">
+        <a class="btn btn-liturgico" asp-page="./Agregar">
+            + Registrar Bautismo
+        </a>
+    </div>
+
+    <div class="row g-4">
+
+        @if (Model.bautismos != null && Model.bautismos.Any())
+        {
+            @foreach (var b in Model.bautismos)
+            {
+                <div class="col-md-4">
+                    <div class="card-liturgica h-100">
+
+                        <!-- BAUTIZANDO -->
+                        <h5 class="card-titulo">
+                            @b.BautizandoNombre
+                        </h5>
+
+                        <hr class="linea-dorada" />
+
+                        <!-- PADRES -->
+                        <p><b>Padre:</b> @b.PadreNombre</p>
+                        <p><b>Madre:</b> @b.MadreNombre</p>
+
+                        <!-- PADRINOS -->
+                        <p><b>Padrino:</b> @b.PadrinoNombre</p>
+                        <p><b>Madrina:</b> @b.MadrinaNombre</p>
+
+                        <!-- EXTRA -->
+                        <p><b>Declarante:</b> @b.DeclaranteNombre</p>
+                        <p><b>Tipo Unión:</b> @b.TipoUnionPadres</p>
+
+                        <!-- BOTONES -->
+                        <div class="mt-3 d-flex gap-2 flex-wrap">
+
+                            <a class="btn btn-liturgico-outline btn-sm"
+                               asp-page="./Detalle"
+                               asp-route-id="@b.Id">
+                                Detalle
+                            </a>
+
+                            <a class="btn btn-liturgico-outline btn-sm"
+                               asp-page="./Editar"
+                               asp-route-id="@b.Id">
+                                Editar
+                            </a>
+
+                            <a class="btn btn-liturgico-danger btn-sm"
+                               asp-page="./Eliminar"
+                               asp-route-id="@b.Id">
+                                Eliminar
+                            </a>
+
+                        </div>
+
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12">
+                <div class="alert-liturgica text-center">
+                    No hay bautismos registrados.
+                </div>
+            </div>
+        }
+
+    </div>
+
+</div>

@@ -1,13 +1,13 @@
 ﻿@page
-@model Web.Pages.Bautismos.AgregarModel
+@model Web.Pages.Bautismos.EditarModel
 
 <div class="container mt-5" style="max-width: 900px;">
 
     <div class="card-liturgica-form">
 
         <div class="form-header-liturgico">
-            <h3>Registrar Bautismo</h3>
-            <span class="badge-liturgico">Nuevo</span>
+            <h3>Editar Bautismo</h3>
+            <span class="badge-liturgico">Actualización</span>
         </div>
 
         <hr class="linea-dorada" />
@@ -19,7 +19,7 @@
                 <!-- BAUTIZANDO -->
                 <div class="col-md-6">
                     <label>Bautizando</label>
-                    <select class="form-control input-liturgico" asp-for="bautismo.BautizandoId">
+                    <select asp-for="bautismo.BautizandoId" class="form-control input-liturgico">
                         <option value="">Seleccione</option>
                         @foreach (var p in Model.Personas)
                         {
@@ -31,7 +31,7 @@
                 <!-- PADRES -->
                 <div class="col-md-6">
                     <label>Padre</label>
-                    <select class="form-control input-liturgico" asp-for="bautismo.PadreId">
+                    <select asp-for="bautismo.PadreId" class="form-control input-liturgico">
                         <option value="">Seleccione</option>
                         @foreach (var p in Model.Personas)
                         {
@@ -42,7 +42,7 @@
 
                 <div class="col-md-6">
                     <label>Madre</label>
-                    <select class="form-control input-liturgico" asp-for="bautismo.MadreId">
+                    <select asp-for="bautismo.MadreId" class="form-control input-liturgico">
                         <option value="">Seleccione</option>
                         @foreach (var p in Model.Personas)
                         {
@@ -51,10 +51,10 @@
                     </select>
                 </div>
 
-                <!-- ABUELOS PATERNOS -->
+                <!-- ABUELOS -->
                 <div class="col-md-6">
                     <label>Abuelo Paterno</label>
-                    <select class="form-control input-liturgico" asp-for="bautismo.AbueloPaternoId">
+                    <select asp-for="bautismo.AbueloPaternoId" class="form-control input-liturgico">
                         <option value="">Seleccione</option>
                         @foreach (var p in Model.Personas)
                         {
@@ -65,7 +65,7 @@
 
                 <div class="col-md-6">
                     <label>Abuela Paterna</label>
-                    <select class="form-control input-liturgico" asp-for="bautismo.AbuelaPaternaId">
+                    <select asp-for="bautismo.AbuelaPaternaId" class="form-control input-liturgico">
                         <option value="">Seleccione</option>
                         @foreach (var p in Model.Personas)
                         {
@@ -74,10 +74,9 @@
                     </select>
                 </div>
 
-                <!-- ABUELOS MATERNOS -->
                 <div class="col-md-6">
                     <label>Abuelo Materno</label>
-                    <select class="form-control input-liturgico" asp-for="bautismo.AbueloMaternoId">
+                    <select asp-for="bautismo.AbueloMaternoId" class="form-control input-liturgico">
                         <option value="">Seleccione</option>
                         @foreach (var p in Model.Personas)
                         {
@@ -88,7 +87,7 @@
 
                 <div class="col-md-6">
                     <label>Abuela Materna</label>
-                    <select class="form-control input-liturgico" asp-for="bautismo.AbuelaMaternaId">
+                    <select asp-for="bautismo.AbuelaMaternaId" class="form-control input-liturgico">
                         <option value="">Seleccione</option>
                         @foreach (var p in Model.Personas)
                         {
@@ -100,7 +99,7 @@
                 <!-- PADRINOS -->
                 <div class="col-md-6">
                     <label>Padrino</label>
-                    <select class="form-control input-liturgico" asp-for="bautismo.PadrinoId">
+                    <select asp-for="bautismo.PadrinoId" class="form-control input-liturgico">
                         <option value="">Seleccione</option>
                         @foreach (var p in Model.Personas)
                         {
@@ -111,7 +110,7 @@
 
                 <div class="col-md-6">
                     <label>Madrina</label>
-                    <select class="form-control input-liturgico" asp-for="bautismo.MadrinaId">
+                    <select asp-for="bautismo.MadrinaId" class="form-control input-liturgico">
                         <option value="">Seleccione</option>
                         @foreach (var p in Model.Personas)
                         {
@@ -123,7 +122,7 @@
                 <!-- DECLARANTE -->
                 <div class="col-md-6">
                     <label>Declarante</label>
-                    <select class="form-control input-liturgico" asp-for="bautismo.DeclaranteId">
+                    <select asp-for="bautismo.DeclaranteId" class="form-control input-liturgico">
                         <option value="">Seleccione</option>
                         @foreach (var p in Model.Personas)
                         {
@@ -134,22 +133,24 @@
 
                 <!-- DATOS -->
                 <div class="col-md-6">
-                    <label>Tipo Unión Padres</label>
-                    <input class="form-control input-liturgico" asp-for="bautismo.TipoUnionPadres" />
+                    <label>Tipo Unión</label>
+                    <input asp-for="bautismo.TipoUnionPadres" class="form-control input-liturgico" />
                 </div>
 
                 <div class="col-md-6">
-                    <label>Fecha Matrimonio Padres</label>
-                    <input type="date" class="form-control input-liturgico" asp-for="bautismo.FechaMatrimonioPadres" />
+                    <label>Fecha Matrimonio</label>
+                    <input type="date" asp-for="bautismo.FechaMatrimonioPadres" class="form-control input-liturgico" />
                 </div>
 
             </div>
+
+            <input type="hidden" asp-for="bautismo.Id" />
 
             <div class="text-danger mt-3" asp-validation-summary="All"></div>
 
             <div class="mt-4 d-flex justify-content-between">
                 <a asp-page="./Index" class="btn btn-liturgico-outline">← Regresar</a>
-                <button type="submit" class="btn btn-liturgico">Guardar</button>
+                <button type="submit" class="btn btn-liturgico">Guardar Cambios</button>
             </div>
 
         </form>

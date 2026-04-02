@@ -1,0 +1,54 @@
+﻿@page
+@model Web.Pages.Bautismos.EliminarModel
+
+<div class="container mt-5" style="max-width: 700px;">
+
+    <div class="card-liturgica-eliminar">
+
+        <div class="eliminar-header">
+            <h3>Eliminar Bautismo</h3>
+            <span class="badge-peligro">Acción irreversible</span>
+        </div>
+
+        <hr class="linea-dorada" />
+
+        <p class="text-muted mb-4">
+            ¿Está seguro que desea eliminar este registro? Esta acción no se puede deshacer.
+        </p>
+
+        <!-- INFO -->
+        <div class="info-eliminar">
+
+            <p><b>Bautizando:</b><br />@Model.bautismo.BautizandoNombre</p>
+
+            <p><b>Padre:</b><br />@Model.bautismo.PadreNombre</p>
+            <p><b>Madre:</b><br />@Model.bautismo.MadreNombre</p>
+
+            <p><b>Padrino:</b><br />@Model.bautismo.PadrinoNombre</p>
+            <p><b>Madrina:</b><br />@Model.bautismo.MadrinaNombre</p>
+
+            <p><b>Declarante:</b><br />@Model.bautismo.DeclaranteNombre</p>
+
+        </div>
+
+        <form method="post">
+
+            <input type="hidden" asp-for="bautismo.Id" />
+
+            <div class="mt-4 d-flex justify-content-between">
+
+                <a asp-page="./Index" class="btn btn-liturgico-outline">
+                    ← Cancelar
+                </a>
+
+                <button type="submit" class="btn btn-liturgico-danger">
+                    Eliminar
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
