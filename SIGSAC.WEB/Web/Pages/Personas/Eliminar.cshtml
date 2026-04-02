@@ -1,0 +1,61 @@
+﻿@page
+@model Web.Pages.Personas.EliminarModel
+
+<div class="container mt-5" style="max-width: 700px;">
+
+    <div class="card-liturgica-eliminar">
+
+        <div class="eliminar-header">
+            <h3>Eliminar Persona</h3>
+            <span class="badge-peligro">Acción irreversible</span>
+        </div>
+
+        <hr class="linea-dorada" />
+
+        <p class="text-muted mb-4">
+            ¿Está seguro que desea eliminar este registro? Esta acción no se puede deshacer.
+        </p>
+
+        <div class="info-eliminar">
+
+            <p>
+                <b>Nombre:</b><br />
+                @Model.persona.Nombre @Model.persona.PrimerApellido @Model.persona.SegundoApellido
+            </p>
+
+            <p><b>Cédula:</b><br />@Model.persona.Cedula</p>
+            <p><b>Pasaporte:</b><br />@Model.persona.Pasaporte</p>
+            <p><b>Sexo:</b><br />@Model.persona.Sexo</p>
+
+            <p>
+                <b>Fecha Nacimiento:</b><br />
+                @Model.persona.FechaNacimiento.ToShortDateString()
+            </p>
+
+            <p><b>Nacionalidad:</b><br />@Model.persona.Nacionalidad</p>
+            <p><b>Estado Civil:</b><br />@Model.persona.EstadoCivil</p>
+            <p><b>Profesión:</b><br />@Model.persona.Profesion</p>
+
+        </div>
+
+        <form method="post">
+
+            <input type="hidden" asp-for="persona.Id" />
+
+            <div class="mt-4 d-flex justify-content-between">
+
+                <a asp-page="./Index" class="btn btn-liturgico-outline">
+                    ← Cancelar
+                </a>
+
+                <button type="submit" class="btn btn-liturgico-danger">
+                    Eliminar
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

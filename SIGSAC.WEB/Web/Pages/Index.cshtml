@@ -1,0 +1,65 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<section class="hero-landing d-flex align-items-center">
+
+    <div class="container hero-content">
+
+        <h1 class="hero-title-main">
+            Sistema Integral de Gestión de Sacramentos
+        </h1>
+
+        <p class="hero-sub">
+            Plataforma diseñada para la administración eficiente de registros sacramentales,
+            facilitando la organización parroquial con claridad, orden y precisión.
+        </p>
+
+        <div class="hero-buttons">
+            <a asp-page="/Personas/Index" class="btn btn-hero-primary">
+                Ingresar al sistema
+            </a>
+
+            <a asp-page="/Privacy" class="btn btn-hero-outline">
+                Información
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+<div class="container mt-5">
+    <div class="row g-4">
+
+        <div class="col-md-4">
+            <div class="module-card text-center">
+                <i class="bi bi-people fs-1"></i>
+                <h5 class="mt-3">Personas</h5>
+                <p>Gestión de feligreses</p>
+                <a asp-page="/Personas/Index" class="btn btn-outline-secondary">Entrar</a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="module-card text-center">
+                <i class="bi bi-droplet fs-1"></i>
+                <h5 class="mt-3">Bautizos</h5>
+                <p>Registro sacramental</p>
+                <button class="btn btn-outline-secondary">Próximamente</button>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="module-card text-center">
+                <i class="bi bi-heart fs-1"></i>
+                <h5 class="mt-3">Matrimonios</h5>
+                <p>Control parroquial</p>
+                <button class="btn btn-outline-secondary">Próximamente</button>
+            </div>
+        </div>
+
+    </div>
+</div>

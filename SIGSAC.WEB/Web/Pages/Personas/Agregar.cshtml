@@ -1,0 +1,130 @@
+﻿@page
+@model Web.Pages.Personas.AgregarModel
+
+<div class="container mt-5" style="max-width: 900px;">
+
+    <div class="card-liturgica-form">
+
+        <!-- HEADER -->
+        <div class="form-header-liturgico">
+            <h3>Agregar Persona</h3>
+            <span class="badge-liturgico">Nuevo Registro</span>
+        </div>
+
+        <hr class="linea-dorada" />
+
+        <form method="post">
+
+            <div class="row g-3">
+
+                <!-- NOMBRE -->
+                <div class="col-md-4">
+                    <label class="form-label">Nombre</label>
+                    <input class="form-control input-liturgico" asp-for="persona.Nombre" />
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">Primer Apellido</label>
+                    <input class="form-control input-liturgico" asp-for="persona.PrimerApellido" />
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">Segundo Apellido</label>
+                    <input class="form-control input-liturgico" asp-for="persona.SegundoApellido" />
+                </div>
+
+                <!-- IDENTIFICACIÓN -->
+                <div class="col-md-6">
+                    <label class="form-label">Cédula</label>
+                    <input class="form-control input-liturgico" asp-for="persona.Cedula" pattern="\d{9}" />
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Pasaporte</label>
+                    <input class="form-control input-liturgico" asp-for="persona.Pasaporte" />
+                </div>
+
+                <!-- GENERALES -->
+                <div class="col-md-4">
+                    <label class="form-label">Sexo</label>
+                    <select class="form-control input-liturgico" asp-for="persona.Sexo">
+                        <option value="">Seleccione</option>
+                        <option>Masculino</option>
+                        <option>Femenino</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">Fecha Nacimiento</label>
+                    <input type="date" class="form-control input-liturgico" asp-for="persona.FechaNacimiento" />
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">Hora Nacimiento</label>
+                    <input type="time" class="form-control input-liturgico" asp-for="persona.HoraNacimiento" />
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Lugar Nacimiento</label>
+                    <input class="form-control input-liturgico" asp-for="persona.LugarNacimiento" />
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Nacionalidad</label>
+                    <input class="form-control input-liturgico" asp-for="persona.Nacionalidad" />
+                </div>
+
+                <!-- EXTRA -->
+                <div class="col-md-6">
+                    <label class="form-label">Estado Civil</label>
+                    <select class="form-control input-liturgico" asp-for="persona.EstadoCivil">
+                        <option value="">Seleccione</option>
+                        <option>Soltero</option>
+                        <option>Soltera</option>
+                        <option>Casado</option>
+                        <option>Casada</option>
+                        <option>Divorciado</option>
+                        <option>Divorciada</option>
+                        <option>Viudo</option>
+                        <option>Viuda</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Profesión</label>
+                    <input class="form-control input-liturgico" asp-for="persona.Profesion" />
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Religión</label>
+                    <input class="form-control input-liturgico" asp-for="persona.Religion" />
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label">Dirección</label>
+                    <textarea class="form-control input-liturgico" asp-for="persona.Direccion"></textarea>
+                </div>
+
+            </div>
+
+            <!-- VALIDACIONES -->
+            <div class="text-danger mt-3" asp-validation-summary="All"></div>
+
+            <!-- BOTONES -->
+            <div class="mt-4 d-flex justify-content-between">
+
+                <a asp-page="./Index" class="btn btn-liturgico-outline">
+                    ← Regresar
+                </a>
+
+                <button type="submit" class="btn btn-liturgico">
+                    Guardar
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

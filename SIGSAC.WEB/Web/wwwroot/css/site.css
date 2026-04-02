@@ -1,0 +1,365 @@
+/* ===== FUENTES ===== */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap');
+
+/* ===== BASE ===== */
+body {
+    font-family: 'Cormorant Garamond', serif;
+    background: #f8f6f2; /* marfil claro */
+    color: #1f2937;
+    margin: 0;
+}
+/* ===== FORM CARD ===== */
+.card-liturgica-form {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 30px;
+    border: 1px solid rgba(212,175,55,0.25);
+    box-shadow: 0 10px 35px rgba(0,0,0,0.05);
+}
+
+/* HEADER */
+.form-header-liturgico {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .form-header-liturgico h3 {
+        font-family: 'Cinzel', serif;
+        margin: 0;
+    }
+
+/* INPUTS */
+.input-liturgico {
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    transition: 0.3s;
+}
+
+    .input-liturgico:focus {
+        border-color: #d4af37;
+        box-shadow: 0 0 0 2px rgba(212,175,55,0.2);
+    }
+
+/* ===== NAVBAR ===== */
+.app-navbar {
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(212,175,55,0.2);
+}
+
+.brand-title {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 2px;
+    color: #1f2937;
+}
+
+/* ===== ELIMINAR CARD ===== */
+.card-liturgica-eliminar {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 30px;
+    border: 1px solid rgba(220,38,38,0.25);
+    box-shadow: 0 10px 35px rgba(0,0,0,0.05);
+}
+
+/* HEADER */
+.eliminar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .eliminar-header h3 {
+        font-family: 'Cinzel', serif;
+        margin: 0;
+    }
+
+/* BADGE ROJO */
+.badge-peligro {
+    background: rgba(220,38,38,0.1);
+    color: #dc2626;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+/* INFO */
+.info-eliminar p {
+    margin-bottom: 10px;
+}
+
+/* BOTÓN ELIMINAR */
+.btn-liturgico-danger {
+    background: #dc2626;
+    color: white;
+    border-radius: 10px;
+    padding: 10px 18px;
+    border: none;
+}
+
+    .btn-liturgico-danger:hover {
+        background: #b91c1c;
+    }
+
+.brand-logo {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #e6c76a, #d4af37);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+/* ===== HERO ===== */
+.hero-landing {
+    position: relative;
+    height: 90vh;
+    background: url('/images/iglesia.jpg') center/cover no-repeat;
+}
+
+    /* overlay claro elegante */
+    .hero-landing::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, rgba(248,246,242,0.95), rgba(248,246,242,0.7));
+    }
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+}
+
+/* TITULO */
+.hero-title-main {
+    font-family: 'Cinzel', serif;
+    font-size: 3.2rem;
+    color: #1f2937;
+}
+
+/* TEXTO */
+.hero-sub {
+    font-size: 1.2rem;
+    color: #374151;
+    margin-top: 1rem;
+}
+
+/* BOTONES */
+.hero-buttons {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+/* ===== DETALLE CARD ===== */
+.card-liturgica-detalle {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 30px;
+    border: 1px solid rgba(212,175,55,0.25);
+    box-shadow: 0 10px 35px rgba(0,0,0,0.05);
+}
+
+/* HEADER */
+.detalle-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .detalle-header h3 {
+        font-family: 'Cinzel', serif;
+        margin: 0;
+    }
+
+/* BADGE */
+.badge-liturgico {
+    background: rgba(212,175,55,0.15);
+    color: #b8962e;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+/* TEXTOS */
+.card-liturgica-detalle b {
+    color: #374151;
+}
+/* ===== FORMULARIO LITURGICO ===== */
+
+.form-liturgico {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 30px;
+    border: 1px solid rgba(212,175,55,0.25);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.form-header h2 {
+    font-family: 'Cinzel', serif;
+    margin-bottom: 5px;
+}
+
+.form-header p {
+    color: #6b7280;
+    margin-bottom: 20px;
+}
+
+/* INPUTS */
+.input-liturgico {
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    transition: 0.3s;
+}
+
+    .input-liturgico:focus {
+        border-color: #d4af37;
+        box-shadow: 0 0 0 2px rgba(212,175,55,0.2);
+    }
+
+/* BOTÓN */
+.btn-liturgico {
+    background: linear-gradient(135deg, #e6c76a, #d4af37);
+    color: #1f2937;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+}
+
+    .btn-liturgico:hover {
+        transform: scale(1.03);
+    }
+
+.btn-hero-primary {
+    background: linear-gradient(135deg, #e6c76a, #d4af37);
+    color: #1f2937;
+    border-radius: 10px;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    font-weight: 600;
+}
+
+.btn-hero-outline {
+    border: 1px solid #d4af37;
+    color: #b8962e;
+    border-radius: 10px;
+    padding: 0.8rem 1.5rem;
+}
+/* mejora visibilidad */
+.navbar-light .nav-link {
+    color: #374151;
+    font-weight: 500;
+}
+
+    .navbar-light .nav-link:hover {
+        color: #b8962e;
+    }
+
+/* botón hamburguesa */
+.navbar-toggler-icon {
+    filter: none; /* usa el icono default */
+}
+
+/* ===== CARDS ===== */
+.module-card {
+    background: #ffffff;
+    border: 1px solid rgba(212,175,55,0.25);
+    border-radius: 15px;
+    padding: 20px;
+    transition: 0.3s;
+}
+
+    .module-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+
+    .module-card i {
+        color: #d4af37;
+    }
+
+/* ===== TITULO ===== */
+.titulo-seccion {
+    font-family: 'Cinzel', serif;
+}
+
+/* ===== CARD PERSONAS ===== */
+.card-liturgica {
+    background: #ffffff;
+    border: 1px solid rgba(212,175,55,0.25);
+    border-radius: 15px;
+    padding: 20px;
+    transition: 0.3s;
+    height: 100%;
+}
+
+    .card-liturgica:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+
+.card-titulo {
+    font-family: 'Cinzel', serif;
+    color: #1f2937;
+}
+
+/* línea dorada */
+.linea-dorada {
+    border-top: 1px solid #e6c76a;
+}
+
+/* ===== BOTONES ===== */
+.btn-liturgico-outline {
+    border: 1px solid #d4af37;
+    color: #b8962e;
+    border-radius: 8px;
+    background: transparent;
+}
+
+    .btn-liturgico-outline:hover {
+        background: rgba(212,175,55,0.1);
+    }
+
+/* botón eliminar */
+.btn-liturgico-danger {
+    border: 1px solid #dc2626;
+    color: #dc2626;
+    border-radius: 8px;
+    background: transparent;
+}
+
+    .btn-liturgico-danger:hover {
+        background: rgba(220,38,38,0.1);
+    }
+
+/* alerta bonita */
+.alert-liturgica {
+    background: #fff8e1;
+    border: 1px solid #e6c76a;
+    padding: 15px;
+    border-radius: 10px;
+    color: #92400e;
+}
+
+/* ===== FOOTER ===== */
+.app-footer {
+    background: #ffffff;
+    border-top: 1px solid rgba(212,175,55,0.2);
+    color: #6b7280;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .hero-title-main {
+        font-size: 2.2rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+}

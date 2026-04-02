@@ -1,0 +1,77 @@
+﻿@page
+@model Web.Pages.Personas.IndexModel
+
+<div class="container mt-5">
+
+    <h2 class="titulo-seccion mb-4">Listado de Personas</h2>
+
+    <div class="text-end mb-4">
+        <a class="btn btn-liturgico" asp-page="./Agregar">
+            + Agregar Persona
+        </a>
+    </div>
+
+    <div class="row g-4">
+
+        @if (Model.personas != null && Model.personas.Any())
+        {
+            @foreach (var persona in Model.personas)
+            {
+                <div class="col-md-4">
+                    <div class="card-liturgica h-100">
+
+                        <!-- NOMBRE -->
+                        <h5 class="card-titulo">
+                            @persona.Nombre @persona.PrimerApellido @persona.SegundoApellido
+                        </h5>
+
+                        <hr class="linea-dorada" />
+
+                        <!-- INFO -->
+                        <p><b>Cédula:</b> @persona.Cedula</p>
+                        <p><b>Sexo:</b> @persona.Sexo</p>
+                        <p><b>Nacimiento:</b> @persona.FechaNacimiento.ToShortDateString()</p>
+                        <p><b>Nacionalidad:</b> @persona.Nacionalidad</p>
+
+                        <p><b>Estado Civil:</b> @persona.EstadoCivil</p>
+                        <p><b>Profesión:</b> @persona.Profesion</p>
+
+                        <!-- BOTONES -->
+                        <div class="mt-3 d-flex gap-2 flex-wrap">
+
+                            <a class="btn btn-liturgico-outline btn-sm"
+                               asp-page="./Detalle"
+                               asp-route-id="@persona.Id">
+                                Detalle
+                            </a>
+
+                            <a class="btn btn-liturgico-outline btn-sm"
+                               asp-page="./Editar"
+                               asp-route-id="@persona.Id">
+                                Editar
+                            </a>
+
+                            <a class="btn btn-liturgico-danger btn-sm"
+                               asp-page="./Eliminar"
+                               asp-route-id="@persona.Id">
+                                Eliminar
+                            </a>
+
+                        </div>
+
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12">
+                <div class="alert-liturgica text-center">
+                    No hay personas registradas.
+                </div>
+            </div>
+        }
+
+    </div>
+
+</div>

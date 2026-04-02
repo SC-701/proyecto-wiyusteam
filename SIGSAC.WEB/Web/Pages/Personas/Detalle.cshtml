@@ -1,0 +1,57 @@
+﻿@page
+@model Web.Pages.Personas.DetalleModel
+
+<div class="container mt-5" style="max-width: 800px;">
+
+    <div class="card-liturgica-detalle">
+
+        <!-- HEADER -->
+        <div class="detalle-header">
+            <h3>
+                @Model.persona.Nombre
+                @Model.persona.PrimerApellido
+                @Model.persona.SegundoApellido
+            </h3>
+            <span class="badge-liturgico">Detalle</span>
+        </div>
+
+        <hr class="linea-dorada" />
+
+        <!-- INFO EN GRID -->
+        <div class="row g-3">
+
+            <div class="col-md-6"><b>Cédula:</b><br />@Model.persona.Cedula</div>
+            <div class="col-md-6"><b>Pasaporte:</b><br />@Model.persona.Pasaporte</div>
+
+            <div class="col-md-6"><b>Sexo:</b><br />@Model.persona.Sexo</div>
+            <div class="col-md-6"><b>Estado Civil:</b><br />@Model.persona.EstadoCivil</div>
+
+            <div class="col-md-6"><b>Fecha Nacimiento:</b><br />@Model.persona.FechaNacimiento.ToShortDateString()</div>
+            <div class="col-md-6"><b>Hora:</b><br />@Model.persona.HoraNacimiento</div>
+
+            <div class="col-md-6"><b>Lugar:</b><br />@Model.persona.LugarNacimiento</div>
+            <div class="col-md-6"><b>Nacionalidad:</b><br />@Model.persona.Nacionalidad</div>
+
+            <div class="col-md-6"><b>Profesión:</b><br />@Model.persona.Profesion</div>
+            <div class="col-md-6"><b>Religión:</b><br />@Model.persona.Religion</div>
+
+            <div class="col-12"><b>Dirección:</b><br />@Model.persona.Direccion</div>
+
+        </div>
+
+        <!-- BOTONES -->
+        <div class="mt-4 d-flex justify-content-end gap-2">
+
+            <a class="btn btn-liturgico-outline" asp-page="./Index">
+                Regresar
+            </a>
+
+            <a class="btn btn-liturgico" asp-page="./Editar" asp-route-id="@Model.persona.Id">
+                Editar
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
