@@ -50,7 +50,7 @@ namespace API.Controllers // Capa API (externa)
         [HttpPost]
 
         // MODEL BINDING → JSON → objeto BautismoRequest
-        public async Task<IActionResult> Agregar(BautismoRequest bautismo)
+        public async Task<IActionResult> Agregar([FromBody] BautismoRequest bautismo)
         {
             var resultado = await _bautismoFlujo.Agregar(bautismo);
 
@@ -59,7 +59,7 @@ namespace API.Controllers // Capa API (externa)
 
         // PUT api/bautismo/{Id}
         [HttpPut("{Id}")]
-        public async Task<IActionResult> Editar(int Id, BautismoRequest bautismo)
+        public async Task<IActionResult> Editar([FromRoute] int Id, [FromBody] BautismoRequest bautismo)
         {
             // Verifica existencia antes de editar
             if (!await VerificarBautismoExiste(Id))
@@ -72,7 +72,7 @@ namespace API.Controllers // Capa API (externa)
 
         // DELETE api/bautismo/{Id}
         [HttpDelete("{Id}")]
-        public async Task<IActionResult> Eliminar(int Id)
+        public async Task<IActionResult> Eliminar([FromRoute] int Id)
         {
             // Verifica existencia antes de eliminar
             if (!await VerificarBautismoExiste(Id))
@@ -97,7 +97,7 @@ namespace API.Controllers // Capa API (externa)
 
         // GET api/bautismo/{Id}
         [HttpGet("{Id}")]
-        public async Task<IActionResult> Obtener(int Id)
+        public async Task<IActionResult> Obtener([FromRoute] int Id)
         {
             var resultado = await _bautismoFlujo.Obtener(Id);
 
