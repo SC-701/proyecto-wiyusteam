@@ -7,11 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Npgsql" Version="10.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Abstracciones\Abstracciones.csproj" />
+    <Folder Include="indexes\" />
+    <Folder Include="scripts\" />
+    <Folder Include="seeds\" />
+    <Folder Include="views\" />
   </ItemGroup>
 
 </Project>

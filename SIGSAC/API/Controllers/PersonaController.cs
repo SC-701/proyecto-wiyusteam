@@ -51,10 +51,9 @@ namespace API.Controllers // Namespace de la capa API (capa externa)
         #region Operaciones
 
         // POST api/persona
-        [HttpPost]
 
-        // Aquí tenemos MODEL BINDING! 
-        public async Task<IActionResult> Agregar(PersonaRequest persona) // ASP.NET convierte JSON → objeto automáticamente
+        [HttpPost]
+        public async Task<IActionResult> Agregar([FromBody] PersonaRequest persona) // ASP.NET convierte JSON → objeto automáticamente
         {
             // Llama al flujo para agregar la persona (no accede directo a BD)
             var resultado = await _personaFlujo.Agregar(persona);
@@ -66,7 +65,7 @@ namespace API.Controllers // Namespace de la capa API (capa externa)
 
         // PUT api/persona/{Id}
         [HttpPut("{Id}")]
-        public async Task<IActionResult> Editar(int Id, PersonaRequest persona)
+        public async Task<IActionResult> Editar([FromRoute] int Id, [FromBody] PersonaRequest persona)
         {
             // Verifica si la persona existe antes de editar
             if (!await VerificarPersonaExiste(Id))
@@ -80,7 +79,7 @@ namespace API.Controllers // Namespace de la capa API (capa externa)
 
         // DELETE api/persona/{Id}
         [HttpDelete("{Id}")]
-        public async Task<IActionResult> Eliminar(int Id)
+        public async Task<IActionResult> Eliminar([FromRoute] int Id)
         {
             // Verifica existencia antes de eliminar
             if (!await VerificarPersonaExiste(Id))
@@ -108,7 +107,7 @@ namespace API.Controllers // Namespace de la capa API (capa externa)
 
         // GET api/persona/{Id}
         [HttpGet("{Id}")]
-        public async Task<IActionResult> Obtener(int Id)
+        public async Task<IActionResult> Obtener([FromRoute] int Id)
         {
             // Obtiene una persona por Id
             var resultado = await _personaFlujo.Obtener(Id);

@@ -34,7 +34,9 @@ Es la capa responsable de interactuar directamente con SQL Server
 using Abstracciones.Interfaces.DA; // Interfaz que define el contrato del DA
 using Abstracciones.Modelos; // Modelos (PersonaRequest, PersonaResponse, etc.)
 using Dapper; // Librería Dapper (micro ORM para ejecutar SQL)
-using Microsoft.Data.SqlClient; // Conexión a SQL Server
+//using Microsoft.Data.SqlClient; // Conexión a SQL Server
+using Npgsql;
+using System.Data;
 
 namespace DA // Namespace de la capa de acceso a datos
 {
@@ -42,7 +44,7 @@ namespace DA // Namespace de la capa de acceso a datos
     public class PersonaDA : IPersonaDA
     {
         private IRepositorioDapper _repositorioDapper; // Repositorio que da la conexión
-        private SqlConnection _sqlConnection; // Conexión a la BD
+        private IDbConnection _npgsqlConnection; // Conexión a la BD
 
         // Constructor con inyección de dependencias
         public PersonaDA(IRepositorioDapper repositorioDapper)
@@ -50,16 +52,32 @@ namespace DA // Namespace de la capa de acceso a datos
             _repositorioDapper = repositorioDapper;
 
             // Obtiene la conexión desde el repositorio (NO se crea directo aquí)
-            _sqlConnection = _repositorioDapper.ObtenerRepositorio();
+            _npgsqlConnection = _repositorioDapper.ObtenerRepositorio();
         }
 
         // INSERTAR persona
         public async Task<int> Agregar(PersonaRequest persona)
         {
-            string query = @"AgregarPersona"; // Nombre del Stored Procedure
+            string query = @"SELECT agregar_persona(
+    @Nombre,
+    @PrimerApellido,
+    @SegundoApellido,
+    @Cedula,
+    @Pasaporte,
+    @Sexo,
+    @FechaNacimiento,
+    @HoraNacimiento,
+    @LugarNacimiento,
+    @Nacionalidad,
+    @EstadoCivil,
+    @Profesion,
+    @Religion,
+    @Direccion
+)";
+// Nombre del Stored Procedure
 
             // Ejecuta el SP y devuelve un valor (ID generado)
-            var resultadoConsulta = await _sqlConnection.ExecuteScalarAsync<int>(
+            var resultadoConsulta = await _npgsqlConnection.ExecuteScalarAsync<int>(
                 query,
                 new // Parámetros enviados al SP
                 {
@@ -89,9 +107,26 @@ namespace DA // Namespace de la capa de acceso a datos
             // Valida que exista antes de editar
             await verificarPersonaExiste(Id);
 
-            string query = @"EditarPersona";
+            string query = @"
+SELECT editar_persona(
+    @Id,
+    @Nombre,
+    @PrimerApellido,
+    @SegundoApellido,
+    @Cedula,
+    @Pasaporte,
+    @Sexo,
+    @FechaNacimiento,
+    @HoraNacimiento,
+    @LugarNacimiento,
+    @Nacionalidad,
+    @EstadoCivil,
+    @Profesion,
+    @Religion,
+    @Direccion
+)";
 
-            var resultadoConsulta = await _sqlConnection.ExecuteScalarAsync<int>(
+            var resultadoConsulta = await _npgsqlConnection.ExecuteScalarAsync<int>(
                 query,
                 new
                 {
@@ -122,9 +157,9 @@ namespace DA // Namespace de la capa de acceso a datos
             // Valida que exista antes de eliminar
             await verificarPersonaExiste(Id);
 
-            string query = @"EliminarPersona";
+            string query = @"SELECT eliminar_persona(@Id)";
 
-            var resultadoConsulta = await _sqlConnection.ExecuteScalarAsync<int>(
+            var resultadoConsulta = await _npgsqlConnection.ExecuteScalarAsync<int>(
                 query,
                 new { Id = Id }
             );
@@ -135,10 +170,11 @@ namespace DA // Namespace de la capa de acceso a datos
         // OBTENER TODAS las personas
         public async Task<IEnumerable<PersonaResponse>> Obtener()
         {
-            string query = @"ObtenerPersonas";
+            string query = @"SELECT * FROM obtener_personas()";
 
             // Devuelve lista de objetos mapeados automáticamente
-            var resultadoConsulta = await _sqlConnection.QueryAsync<PersonaResponse>(query);
+            var resultadoConsulta =
+                await _npgsqlConnection.QueryAsync<PersonaResponse>(query);
 
             return resultadoConsulta;
         }
@@ -146,9 +182,9 @@ namespace DA // Namespace de la capa de acceso a datos
         // OBTENER una persona por ID
         public async Task<PersonaDetalle> Obtener(int Id)
         {
-            string query = @"ObtenerPersona";
+            string query = @"SELECT * FROM obtener_persona(@Id)";
 
-            var resultadoConsulta = await _sqlConnection.QueryAsync<PersonaDetalle>(
+            var resultadoConsulta = await _npgsqlConnection.QueryAsync<PersonaDetalle>(
                 query,
                 new { Id = Id }
             );
