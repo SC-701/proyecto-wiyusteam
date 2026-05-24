@@ -34,7 +34,9 @@ Es la capa responsable de interactuar directamente con SQL Server
 using Abstracciones.Interfaces.DA; // Interfaz del DA (contrato)
 using Abstracciones.Modelos; // Modelos (BautismoRequest, BautismoDetalle, etc.)
 using Dapper; // Micro ORM para ejecutar SQL
-using Microsoft.Data.SqlClient; // Conexión a SQL Server
+//using Microsoft.Data.SqlClient; // Conexión a SQL Server
+using Npgsql;
+using System.Data;
 
 namespace DA // Capa de acceso a datos
 {
@@ -42,7 +44,7 @@ namespace DA // Capa de acceso a datos
     public class BautismoDA : IBautismoDA
     {
         private IRepositorioDapper _repositorioDapper; // Proveedor de conexión
-        private SqlConnection _sqlConnection; // Conexión a la BD
+        private IDbConnection _npgsqlConnection; // Conexión a la BD
 
         // Constructor con inyección de dependencias
         public BautismoDA(IRepositorioDapper repositorioDapper)
@@ -50,15 +52,29 @@ namespace DA // Capa de acceso a datos
             _repositorioDapper = repositorioDapper;
 
             // Obtiene la conexión desde el repositorio (NO se crea aquí)
-            _sqlConnection = _repositorioDapper.ObtenerRepositorio();
+            _npgsqlConnection = _repositorioDapper.ObtenerRepositorio();
         }
 
         // INSERTAR bautismo
         public async Task<int> Agregar(BautismoRequest bautismo)
         {
-            string query = @"AgregarBautismo"; // Stored Procedure
+            string query = @"
+SELECT agregar_bautismo(
+    @BautizandoId,
+    @PadreId,
+    @MadreId,
+    @TipoUnionPadres,
+    @FechaMatrimonioPadres,
+    @AbueloPaternoId,
+    @AbuelaPaternaId,
+    @AbueloMaternoId,
+    @AbuelaMaternaId,
+    @PadrinoId,
+    @MadrinaId,
+    @DeclaranteId
+)";
 
-            var resultadoConsulta = await _sqlConnection.ExecuteScalarAsync<int>(
+            var resultadoConsulta = await _npgsqlConnection.ExecuteScalarAsync<int>(
                 query,
                 new // Parámetros enviados al SP
                 {
@@ -86,9 +102,23 @@ namespace DA // Capa de acceso a datos
             // Verifica que exista antes de editar
             await verificarBautismoExiste(Id);
 
-            string query = @"EditarBautismo";
+            string query = @"SELECT editar_bautismo(
+    @Id,
+    @BautizandoId,
+    @PadreId,
+    @MadreId,
+    @TipoUnionPadres,
+    @FechaMatrimonioPadres,
+    @AbueloPaternoId,
+    @AbuelaPaternaId,
+    @AbueloMaternoId,
+    @AbuelaMaternaId,
+    @PadrinoId,
+    @MadrinaId,
+    @DeclaranteId
+)";
 
-            var resultadoConsulta = await _sqlConnection.ExecuteScalarAsync<int>(
+            var resultadoConsulta = await _npgsqlConnection.ExecuteScalarAsync<int>(
                 query,
                 new
                 {
@@ -117,9 +147,9 @@ namespace DA // Capa de acceso a datos
             // Verifica existencia antes de eliminar
             await verificarBautismoExiste(Id);
 
-            string query = @"EliminarBautismo";
+            string query = @"SELECT eliminar_bautismo(@Id)";
 
-            var resultadoConsulta = await _sqlConnection.ExecuteScalarAsync<int>(
+            var resultadoConsulta = await _npgsqlConnection.ExecuteScalarAsync<int>(
                 query,
                 new { Id = Id }
             );
@@ -130,9 +160,9 @@ namespace DA // Capa de acceso a datos
         // OBTENER TODOS los bautismos
         public async Task<IEnumerable<BautismoDetalle>> Obtener()
         {
-            string query = @"ObtenerBautismos";
+            string query = @"SELECT * FROM obtener_bautismos()";
 
-            var resultadoConsulta = await _sqlConnection.QueryAsync<BautismoDetalle>(query);
+            var resultadoConsulta = await _npgsqlConnection.QueryAsync<BautismoDetalle>(query);
 
             return resultadoConsulta;
         }
@@ -140,9 +170,9 @@ namespace DA // Capa de acceso a datos
         // OBTENER un bautismo por ID
         public async Task<BautismoDetalle> Obtener(int Id)
         {
-            string query = @"ObtenerBautismo";
+            string query = @"SELECT * FROM obtener_bautismo(@Id)";
 
-            var resultadoConsulta = await _sqlConnection.QueryAsync<BautismoDetalle>(
+            var resultadoConsulta = await _npgsqlConnection.QueryAsync<BautismoDetalle>(
                 query,
                 new { Id = Id }
             );

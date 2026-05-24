@@ -23,35 +23,60 @@ objeto SqlConnection reutilizable.
 */
 
 using Abstracciones.Interfaces.DA; // Importa la interfaz que este repositorio debe implementar (contrato)
-using Microsoft.Data.SqlClient; // Librería para trabajar con SQL Server (SqlConnection)
+//using Microsoft.Data.SqlClient; // Librería para trabajar con SQL Server (SqlConnection)
 using Microsoft.Extensions.Configuration; // Permite leer configuración (appsettings.json)
 
-namespace DA.Repositorios // Namespace de la capa de acceso a datos (Data Access)
+using System.Data;
+using Npgsql;
+
+
+
+//namespace DA.Repositorios // Namespace de la capa de acceso a datos (Data Access)
+//{
+//    // Clase que implementa la interfaz IRepositorioDapper
+//    // Se encarga de crear y devolver la conexión a la base de datos
+//    public class RepositorioDapper : IRepositorioDapper
+//    {
+//        private readonly IConfiguration _configuracion;
+//        // Permite acceder a valores de configuración (como ConnectionStrings)
+
+//        private readonly SqlConnection _conexionBaseDatos;
+//        // Objeto que representa la conexión con SQL Server
+
+//        // Constructor con inyección de dependencias
+//        public RepositorioDapper(IConfiguration configuracion)
+//        {
+//            _configuracion = configuracion; // Se guarda la configuración
+
+//            // Se crea la conexión usando la cadena definida en appsettings.json
+//            _conexionBaseDatos =
+//                new SqlConnection(_configuracion.GetConnectionString("BD"));
+//        }
+
+//        // Método que devuelve la conexión a la base de datos
+//        public SqlConnection ObtenerRepositorio()
+//        {
+//            return _conexionBaseDatos; // Retorna la conexión ya configurada
+//        }
+//    }
+//}
+namespace DA.Repositorios
 {
-    // Clase que implementa la interfaz IRepositorioDapper
-    // Se encarga de crear y devolver la conexión a la base de datos
     public class RepositorioDapper : IRepositorioDapper
     {
-        private readonly IConfiguration _configuracion;
-        // Permite acceder a valores de configuración (como ConnectionStrings)
+        private readonly IConfiguration _configuration;
 
-        private readonly SqlConnection _conexionBaseDatos;
-        // Objeto que representa la conexión con SQL Server
-
-        // Constructor con inyección de dependencias
-        public RepositorioDapper(IConfiguration configuracion)
+        public RepositorioDapper(IConfiguration configuration)
         {
-            _configuracion = configuracion; // Se guarda la configuración
-
-            // Se crea la conexión usando la cadena definida en appsettings.json
-            _conexionBaseDatos =
-                new SqlConnection(_configuracion.GetConnectionString("BD"));
+            _configuration = configuration;
         }
 
-        // Método que devuelve la conexión a la base de datos
-        public SqlConnection ObtenerRepositorio()
+        public IDbConnection ObtenerRepositorio()
         {
-            return _conexionBaseDatos; // Retorna la conexión ya configurada
+            string connectionString =
+                _configuration.GetConnectionString("DefaultConnection");
+
+            return new NpgsqlConnection(connectionString);
         }
     }
 }
