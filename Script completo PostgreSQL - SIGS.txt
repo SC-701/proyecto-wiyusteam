@@ -1,8 +1,4 @@
-# Script completo PostgreSQL - SIGSAC
 
-> Ejecutar TODO este script en pgAdmin Query Tool.
-
-```sql
 CREATE DATABASE "SIGSAC";
 
 -- =========================
@@ -99,9 +95,71 @@ CREATE TABLE bautismo (
 );
 
 
--- =========================
--- FUNCION AGREGAR PERSONA
--- =========================
+
+-- --------------------------------
+CREATE OR REPLACE FUNCTION agregar_bautismo(
+    p_bautizando_id INT,
+    p_padre_id INT,
+    p_madre_id INT,
+    p_tipo_union_padres VARCHAR(50),
+    p_fecha_matrimonio_padres TIMESTAMP,
+    p_abuelo_paterno_id INT,
+    p_abuela_paterna_id INT,
+    p_abuelo_materno_id INT,
+    p_abuela_materna_id INT,
+    p_padrino_id INT,
+    p_madrina_id INT,
+    p_declarante_id INT
+)
+RETURNS INT
+LANGUAGE plpgsql
+AS
+$$
+DECLARE
+    nuevo_id INT;
+BEGIN
+
+    INSERT INTO bautismo
+    (
+        sacramento,
+        bautizando_id,
+        padre_id,
+        madre_id,
+        tipo_union_padres,
+        fecha_matrimonio_padres,
+        abuelo_materno_id,
+        abuela_materna_id,
+        abuelo_paterno_id,
+        abuela_paterna_id,
+        padrino_id,
+        madrina_id,
+        declarante_id
+    )
+    VALUES
+    (
+        1,
+        p_bautizando_id,
+        p_padre_id,
+        p_madre_id,
+        p_tipo_union_padres,
+        p_fecha_matrimonio_padres,
+        p_abuelo_materno_id,
+        p_abuela_materna_id,
+        p_abuelo_paterno_id,
+        p_abuela_paterna_id,
+        p_padrino_id,
+        p_madrina_id,
+        p_declarante_id
+    )
+    RETURNING id
+    INTO nuevo_id;
+
+    RETURN nuevo_id;
+
+END;
+$$;
+
+
 
 CREATE OR REPLACE FUNCTION agregar_persona(
     p_nombre VARCHAR(100),
@@ -161,17 +219,418 @@ BEGIN
         p_religion,
         p_direccion
     )
-    RETURNING id INTO nuevo_id;
+    RETURNING id
+    INTO nuevo_id;
 
     RETURN nuevo_id;
 
 END;
 $$;
 
+CREATE OR REPLACE FUNCTION editar_bautismo(
+    p_id INT,
+    p_bautizando_id INT,
+    p_padre_id INT,
+    p_madre_id INT,
+    p_tipo_union_padres VARCHAR(50),
+    p_fecha_matrimonio_padres TIMESTAMP,
+    p_abuelo_paterno_id INT,
+    p_abuela_paterna_id INT,
+    p_abuelo_materno_id INT,
+    p_abuela_materna_id INT,
+    p_padrino_id INT,
+    p_madrina_id INT,
+    p_declarante_id INT
+)
+RETURNS INT
+LANGUAGE plpgsql
+AS
+$$
+BEGIN
 
--- =========================
--- FUNCION OBTENER PERSONAS
--- =========================
+    UPDATE bautismo
+    SET
+        bautizando_id = p_bautizando_id,
+        padre_id = p_padre_id,
+        madre_id = p_madre_id,
+        tipo_union_padres = p_tipo_union_padres,
+        fecha_matrimonio_padres = p_fecha_matrimonio_padres,
+        abuelo_materno_id = p_abuelo_materno_id,
+        abuela_materna_id = p_abuela_materna_id,
+        abuelo_paterno_id = p_abuelo_paterno_id,
+        abuela_paterna_id = p_abuela_paterna_id,
+        padrino_id = p_padrino_id,
+        madrina_id = p_madrina_id,
+        declarante_id = p_declarante_id
+    WHERE id = p_id;
+
+    RETURN p_id;
+
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION editar_persona(
+    p_id INT,
+    p_nombre VARCHAR(100),
+    p_primer_apellido VARCHAR(100),
+    p_segundo_apellido VARCHAR(100),
+    p_cedula VARCHAR(20),
+    p_pasaporte VARCHAR(20),
+    p_sexo VARCHAR(10),
+    p_fecha_nacimiento TIMESTAMP,
+    p_hora_nacimiento VARCHAR(10),
+    p_lugar_nacimiento VARCHAR(150),
+    p_nacionalidad VARCHAR(100),
+    p_estado_civil VARCHAR(50),
+    p_profesion VARCHAR(100),
+    p_religion VARCHAR(100),
+    p_direccion VARCHAR(200)
+)
+RETURNS INT
+LANGUAGE plpgsql
+AS
+$$
+BEGIN
+
+    UPDATE persona
+    SET
+        nombre = p_nombre,
+        primer_apellido = p_primer_apellido,
+        segundo_apellido = p_segundo_apellido,
+        cedula = p_cedula,
+        pasaporte = p_pasaporte,
+        sexo = p_sexo,
+        fecha_nacimiento = p_fecha_nacimiento,
+        hora_nacimiento = p_hora_nacimiento,
+        lugar_nacimiento = p_lugar_nacimiento,
+        nacionalidad = p_nacionalidad,
+        estado_civil = p_estado_civil,
+        profesion = p_profesion,
+        religion = p_religion,
+        direccion = p_direccion,
+        fecha_actualizacion = NOW()
+    WHERE id = p_id;
+
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'No se encontró la persona con id %', p_id;
+    END IF;
+
+    RETURN p_id;
+
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION eliminar_bautismo(
+    p_id INT
+)
+RETURNS INT
+LANGUAGE plpgsql
+AS
+$$
+BEGIN
+
+    DELETE
+    FROM bautismo
+    WHERE id = p_id;
+
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'No se encontró el bautismo con id %', p_id;
+    END IF;
+
+    RETURN p_id;
+
+END;
+$$;
+
+
+CREATE OR REPLACE FUNCTION eliminar_persona(
+    p_id INT
+)
+RETURNS INT
+LANGUAGE plpgsql
+AS
+$$
+BEGIN
+
+    DELETE
+    FROM persona
+    WHERE id = p_id;
+
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'No se encontró la persona con id %', p_id;
+    END IF;
+
+    RETURN p_id;
+
+END;
+$$;
+
+
+
+CREATE OR REPLACE FUNCTION obtener_bautismo(
+    p_id INT
+)
+RETURNS TABLE
+(
+    id INT,
+    sacramento TEXT,
+
+    "BautizandoId" INT,
+    "BautizandoNombre" TEXT,
+
+    "PadreId" INT,
+    "PadreNombre" TEXT,
+
+    "MadreId" INT,
+    "MadreNombre" TEXT,
+
+    "TipoUnionPadres" TEXT,
+    "FechaMatrimonioPadres" TIMESTAMP,
+
+    "AbueloPaternoId" INT,
+    "AbueloPaternoNombre" TEXT,
+
+    "AbuelaPaternaId" INT,
+    "AbuelaPaternaNombre" TEXT,
+
+    "AbueloMaternoId" INT,
+    "AbueloMaternoNombre" TEXT,
+
+    "AbuelaMaternaId" INT,
+    "AbuelaMaternaNombre" TEXT,
+
+    "PadrinoId" INT,
+    "PadrinoNombre" TEXT,
+
+    "MadrinaId" INT,
+    "MadrinaNombre" TEXT,
+
+    "DeclaranteId" INT,
+    "DeclaranteNombre" TEXT
+)
+LANGUAGE plpgsql
+AS
+$$
+BEGIN
+
+    RETURN QUERY
+
+    SELECT
+        b.id,
+        b.sacramento::TEXT,
+
+        b.bautizando_id,
+        CONCAT(pb.nombre, ' ', pb.primer_apellido, ' ', pb.segundo_apellido),
+
+        b.padre_id,
+        CONCAT(pp.nombre, ' ', pp.primer_apellido, ' ', pp.segundo_apellido),
+
+        b.madre_id,
+        CONCAT(pm.nombre, ' ', pm.primer_apellido, ' ', pm.segundo_apellido),
+
+        b.tipo_union_padres::TEXT,
+        b.fecha_matrimonio_padres,
+
+        b.abuelo_paterno_id,
+        CONCAT(pap.nombre, ' ', pap.primer_apellido, ' ', pap.segundo_apellido),
+
+        b.abuela_paterna_id,
+        CONCAT(pap2.nombre, ' ', pap2.primer_apellido, ' ', pap2.segundo_apellido),
+
+        b.abuelo_materno_id,
+        CONCAT(pam.nombre, ' ', pam.primer_apellido, ' ', pam.segundo_apellido),
+
+        b.abuela_materna_id,
+        CONCAT(pam2.nombre, ' ', pam2.primer_apellido, ' ', pam2.segundo_apellido),
+
+        b.padrino_id,
+        CONCAT(ppad.nombre, ' ', ppad.primer_apellido, ' ', ppad.segundo_apellido),
+
+        b.madrina_id,
+        CONCAT(pmad.nombre, ' ', pmad.primer_apellido, ' ', pmad.segundo_apellido),
+
+        b.declarante_id,
+        CONCAT(pdec.nombre, ' ', pdec.primer_apellido, ' ', pdec.segundo_apellido)
+
+    FROM bautismo b
+
+    LEFT JOIN persona pb ON pb.id = b.bautizando_id
+    LEFT JOIN persona pp ON pp.id = b.padre_id
+    LEFT JOIN persona pm ON pm.id = b.madre_id
+
+    LEFT JOIN persona pam ON pam.id = b.abuelo_materno_id
+    LEFT JOIN persona pam2 ON pam2.id = b.abuela_materna_id
+
+    LEFT JOIN persona pap ON pap.id = b.abuelo_paterno_id
+    LEFT JOIN persona pap2 ON pap2.id = b.abuela_paterna_id
+
+    LEFT JOIN persona ppad ON ppad.id = b.padrino_id
+    LEFT JOIN persona pmad ON pmad.id = b.madrina_id
+
+    LEFT JOIN persona pdec ON pdec.id = b.declarante_id
+
+    WHERE b.id = p_id;
+
+END;
+$$;
+
+
+CREATE OR REPLACE FUNCTION obtener_bautismos()
+RETURNS TABLE
+(
+    id INT,
+    sacramento TEXT,
+
+    "BautizandoId" INT,
+    "BautizandoNombre" TEXT,
+
+    "PadreId" INT,
+    "PadreNombre" TEXT,
+
+    "MadreId" INT,
+    "MadreNombre" TEXT,
+
+    "TipoUnionPadres" TEXT,
+    "FechaMatrimonioPadres" TIMESTAMP,
+
+    "AbueloPaternoId" INT,
+    "AbueloPaternoNombre" TEXT,
+
+    "AbuelaPaternaId" INT,
+    "AbuelaPaternaNombre" TEXT,
+
+    "AbueloMaternoId" INT,
+    "AbueloMaternoNombre" TEXT,
+
+    "AbuelaMaternaId" INT,
+    "AbuelaMaternaNombre" TEXT,
+
+    "PadrinoId" INT,
+    "PadrinoNombre" TEXT,
+
+    "MadrinaId" INT,
+    "MadrinaNombre" TEXT,
+
+    "DeclaranteId" INT,
+    "DeclaranteNombre" TEXT
+)
+LANGUAGE plpgsql
+AS
+$$
+BEGIN
+
+    RETURN QUERY
+
+    SELECT
+        b.id,
+        b.sacramento::TEXT,
+
+        b.bautizando_id,
+        CONCAT(pb.nombre, ' ', pb.primer_apellido, ' ', pb.segundo_apellido),
+
+        b.padre_id,
+        CONCAT(pp.nombre, ' ', pp.primer_apellido, ' ', pp.segundo_apellido),
+
+        b.madre_id,
+        CONCAT(pm.nombre, ' ', pm.primer_apellido, ' ', pm.segundo_apellido),
+
+        b.tipo_union_padres::TEXT,
+        b.fecha_matrimonio_padres,
+
+        b.abuelo_paterno_id,
+        CONCAT(pap.nombre, ' ', pap.primer_apellido, ' ', pap.segundo_apellido),
+
+        b.abuela_paterna_id,
+        CONCAT(pap2.nombre, ' ', pap2.primer_apellido, ' ', pap2.segundo_apellido),
+
+        b.abuelo_materno_id,
+        CONCAT(pam.nombre, ' ', pam.primer_apellido, ' ', pam.segundo_apellido),
+
+        b.abuela_materna_id,
+        CONCAT(pam2.nombre, ' ', pam2.primer_apellido, ' ', pam2.segundo_apellido),
+
+        b.padrino_id,
+        CONCAT(ppad.nombre, ' ', ppad.primer_apellido, ' ', ppad.segundo_apellido),
+
+        b.madrina_id,
+        CONCAT(pmad.nombre, ' ', pmad.primer_apellido, ' ', pmad.segundo_apellido),
+
+        b.declarante_id,
+        CONCAT(pdec.nombre, ' ', pdec.primer_apellido, ' ', pdec.segundo_apellido)
+
+    FROM bautismo b
+
+    LEFT JOIN persona pb ON pb.id = b.bautizando_id
+    LEFT JOIN persona pp ON pp.id = b.padre_id
+    LEFT JOIN persona pm ON pm.id = b.madre_id
+
+    LEFT JOIN persona pam ON pam.id = b.abuelo_materno_id
+    LEFT JOIN persona pam2 ON pam2.id = b.abuela_materna_id
+
+    LEFT JOIN persona pap ON pap.id = b.abuelo_paterno_id
+    LEFT JOIN persona pap2 ON pap2.id = b.abuela_paterna_id
+
+    LEFT JOIN persona ppad ON ppad.id = b.padrino_id
+    LEFT JOIN persona pmad ON pmad.id = b.madrina_id
+
+    LEFT JOIN persona pdec ON pdec.id = b.declarante_id;
+
+END;
+$$;
+
+
+
+CREATE OR REPLACE FUNCTION obtener_persona(
+    p_id INT
+)
+RETURNS TABLE
+(
+    id INT,
+    nombre VARCHAR(100),
+    "PrimerApellido" VARCHAR(100),
+    "SegundoApellido" VARCHAR(100),
+    cedula VARCHAR(20),
+    pasaporte VARCHAR(20),
+    sexo VARCHAR(10),
+    "FechaNacimiento" TIMESTAMP,
+    "HoraNacimiento" VARCHAR(10),
+    "LugarNacimiento" VARCHAR(150),
+    nacionalidad VARCHAR(100),
+    "EstadoCivil" VARCHAR(50),
+    profesion VARCHAR(100),
+    religion VARCHAR(100),
+    direccion VARCHAR(200)
+)
+LANGUAGE plpgsql
+AS
+$$
+BEGIN
+
+    RETURN QUERY
+
+    SELECT
+        p.id,
+        p.nombre,
+        p.primer_apellido,
+        p.segundo_apellido,
+        p.cedula,
+        p.pasaporte,
+        p.sexo,
+        p.fecha_nacimiento,
+        p.hora_nacimiento,
+        p.lugar_nacimiento,
+        p.nacionalidad,
+        p.estado_civil,
+        p.profesion,
+        p.religion,
+        p.direccion
+    FROM persona p
+    WHERE p.id = p_id;
+
+END;
+$$;
+
+
 
 CREATE OR REPLACE FUNCTION obtener_personas()
 RETURNS TABLE
@@ -220,119 +679,3 @@ BEGIN
 END;
 $$;
 
-
--- =========================
--- FUNCION OBTENER BAUTISMOS
--- =========================
-
-CREATE OR REPLACE FUNCTION obtener_bautismos()
-RETURNS TABLE
-(
-    id INT,
-    sacramento TEXT,
-
-    "BautizandoId" INT,
-    "BautizandoNombre" TEXT,
-
-    "PadreId" INT,
-    "PadreNombre" TEXT,
-
-    "MadreId" INT,
-    "MadreNombre" TEXT,
-
-    "TipoUnionPadres" TEXT,
-    "FechaMatrimonioPadres" TEXT,
-
-    "AbueloPaternoId" INT,
-    "AbueloPaternoNombre" TEXT,
-
-    "AbuelaPaternaId" INT,
-    "AbuelaPaternaNombre" TEXT,
-
-    "AbueloMaternoId" INT,
-    "AbueloMaternoNombre" TEXT,
-
-    "AbuelaMaternaId" INT,
-    "AbuelaMaternaNombre" TEXT,
-
-    "PadrinoId" INT,
-    "PadrinoNombre" TEXT,
-
-    "MadrinaId" INT,
-    "MadrinaNombre" TEXT,
-
-    "DeclaranteId" INT,
-    "DeclaranteNombre" TEXT
-)
-LANGUAGE plpgsql
-AS
-$$
-BEGIN
-
-    RETURN QUERY
-
-    SELECT
-        b.id,
-        b.sacramento::TEXT,
-
-        b.bautizando_id,
-        CONCAT(pb.nombre, ' ', pb.primer_apellido, ' ', pb.segundo_apellido),
-
-        b.padre_id,
-        CONCAT(pp.nombre, ' ', pp.primer_apellido, ' ', pp.segundo_apellido),
-
-        b.madre_id,
-        CONCAT(pm.nombre, ' ', pm.primer_apellido, ' ', pm.segundo_apellido),
-
-        b.tipo_union_padres::TEXT,
-        TO_CHAR(b.fecha_matrimonio_padres, 'YYYY-MM-DD'),
-
-        b.abuelo_paterno_id,
-        CONCAT(pap.nombre, ' ', pap.primer_apellido, ' ', pap.segundo_apellido),
-
-        b.abuela_paterna_id,
-        CONCAT(pap2.nombre, ' ', pap2.primer_apellido, ' ', pap2.segundo_apellido),
-
-        b.abuelo_materno_id,
-        CONCAT(pam.nombre, ' ', pam.primer_apellido, ' ', pam.segundo_apellido),
-
-        b.abuela_materna_id,
-        CONCAT(pam2.nombre, ' ', pam2.primer_apellido, ' ', pam2.segundo_apellido),
-
-        b.padrino_id,
-        CONCAT(ppad.nombre, ' ', ppad.primer_apellido, ' ', ppad.segundo_apellido),
-
-        b.madrina_id,
-        CONCAT(pmad.nombre, ' ', pmad.primer_apellido, ' ', pmad.segundo_apellido),
-
-        b.declarante_id,
-        CONCAT(pdec.nombre, ' ', pdec.primer_apellido, ' ', pdec.segundo_apellido)
-
-    FROM bautismo b
-
-    LEFT JOIN persona pb ON pb.id = b.bautizando_id
-    LEFT JOIN persona pp ON pp.id = b.padre_id
-    LEFT JOIN persona pm ON pm.id = b.madre_id
-
-    LEFT JOIN persona pam ON pam.id = b.abuelo_materno_id
-    LEFT JOIN persona pam2 ON pam2.id = b.abuela_materna_id
-
-    LEFT JOIN persona pap ON pap.id = b.abuelo_paterno_id
-    LEFT JOIN persona pap2 ON pap2.id = b.abuela_paterna_id
-
-    LEFT JOIN persona ppad ON ppad.id = b.padrino_id
-    LEFT JOIN persona pmad ON pmad.id = b.madrina_id
-
-    LEFT JOIN persona pdec ON pdec.id = b.declarante_id;
-
-END;
-$$;
-```
-
-## Cómo usarlo
-
-1. Abrir pgAdmin
-2. Crear una conexión PostgreSQL
-3. Abrir Query Tool
-4. Pegar todo el script
-5. Ejecutar con ▶ o F5
